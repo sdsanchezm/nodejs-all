@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const app = express();
 // Jamecho-The-Dog-426384 -> B64
 const secretKey = 'SmFtZWNoby1UaGUtRG9nLTQyNjM4NA==';
+const ROOT_URL_IN_SERVER = '/api3';
 
 
 // hardcoded database
@@ -36,11 +37,11 @@ const verifyToken = (req, res, next) => {
 
 // login endpoing, send in the body the username and pwrt:
 // {
-//     "username": "user",
+//     "username": "user1",
 //     "password": "password1"
 // }
 // the jwt token generated, will have to be sent as a Bearer token
-app.post('/api/login', express.json(), (req, res) => {
+app.post(`${ROOT_URL_IN_SERVER}/login`, express.json(), (req, res) => {
     const { username, password } = req.body;
 
     const user = users.find(u => u.username === username && u.password === password);
@@ -55,12 +56,27 @@ app.post('/api/login', express.json(), (req, res) => {
 });
 
 // general endpoint
-app.get('/api/common', verifyToken, (req, res) => {
+app.get(`${ROOT_URL_IN_SERVER}/common`, verifyToken, (req, res) => {
     res.json({ message: 'endpoint /common accessed', user: req.user });
 });
 
+// GET general endpoint - no token validation
+app.get(`${ROOT_URL_IN_SERVER}`, (req, res) => {
+    res.json({ message: 'GET endpoint / accessed' });
+});
+
+// GET general endpoint - no token validation
+app.get(`${ROOT_URL_IN_SERVER}/test`, (req, res) => {
+    res.json({ message: 'GET endpoint /test accessed' });
+});
+
+// POST general endpoint - no token validation
+app.post(`${ROOT_URL_IN_SERVER}/`, (req, res) => {
+    res.json({ message: 'POST endpoint / accessed' });
+});
+
 // user endpoint
-app.get('/api/user', verifyToken, (req, res) => {
+app.get(`${ROOT_URL_IN_SERVER}/user`, verifyToken, (req, res) => {
     if (req.user.role !== 'USER') {
         return res.status(403).json({ message: 'Forbidden' });
     }
@@ -68,7 +84,7 @@ app.get('/api/user', verifyToken, (req, res) => {
 });
 
 // admin endpoint
-app.get('/api/admin', verifyToken, (req, res) => {
+app.get(`${ROOT_URL_IN_SERVER}/admin`, verifyToken, (req, res) => {
     if (req.user.role !== 'ADMIN') {
         return res.status(403).json({ message: 'Forbidden' });
     }

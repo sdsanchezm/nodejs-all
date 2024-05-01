@@ -5,11 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch index.js",
-    "dev2": "node --watch index2.js",
-    "dev3": "node --watch index3.js",
-    "dev4": "node --watch index4.js",
-    "dev5": "node --watch index5.js"
+    "dev": "node api.js",
+    "start": "node api.js"
   },
   "author": "",
   "license": "ISC",
