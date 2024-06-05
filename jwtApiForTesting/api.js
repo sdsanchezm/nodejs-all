@@ -35,7 +35,7 @@ const verifyToken = (req, res, next) => {
     });
 };
 
-// login endpoing, send in the body the username and pwrt:
+// login endpoint, send in the body the username and pwrt:
 // {
 //     "username": "user1",
 //     "password": "password1"
