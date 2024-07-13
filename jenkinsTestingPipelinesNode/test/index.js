@@ -5,7 +5,7 @@ const mul = require('../');
 describe('Multiplication', () => {
 
     it('positive numbers handling', () => {
-        assert.equal(mul(4, 5), 20);
+        assert.equal(mul(4, 6), 24);
     });
 
     it('negative numbers handling', () => {
