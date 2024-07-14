@@ -9,7 +9,7 @@ describe('Multiplication', () => {
     });
 
     it('negative numbers handling', () => {
-        assert.equal(mul(4, -6), -24);
+        assert.equal(mul(4, -10), -40);
     });
 
     it('decimals handling', () => {
