@@ -1,0 +1,23 @@
+pipeline {
+  agent any
+  tools {
+    nodejs 'node18.20.4'
+  }
+
+  options {
+    timeout(time: 3, unit: 'MINUTES')
+  }
+
+  stages {
+    stage('Installation - Dependencies') {
+      steps {
+        sh 'cd jenkinsTestingPipelinesNode && npm install'
+      }
+    }
+    stage('Running - tests') {
+      steps {
+        sh 'cd jenkinsTestingPipelinesNode && npm run test'
+      }
+    }
+  }
+}
